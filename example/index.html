@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>slruslan/sketch.js examples</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="container">
+	<h1>Sketch.js examples:</h1>
+
+	<p class="lead">1. Simple usage:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="200" id="canvas1"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b>Code:</b></p>
+				<code>
+					$(document).ready(function() {<br>
+					&nbsp;&nbsp;$('#canvas1').sketch();<br>
+					});
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<p class="lead">2. Color change:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="200" id="canvas2"></canvas>
+					<hr>
+					<div class="color-buttons">
+						<a href="#" class="color-btn" data-color="#ffffff" style="background: #ffffff;"></a>
+           	<a href="#" class="color-btn active" data-color="#000000" style="background: #000000;"></a>
+           	<a href="#" class="color-btn" data-color="#3897f1" style="background: #3897f1;"></a>
+           	<a href="#" class="color-btn" data-color="#70c04f" style="background: #70c04f;"></a>
+           	<a href="#" class="color-btn" data-color="#ffcb5d" style="background: #ffcb5d;"></a>
+           	<a href="#" class="color-btn" data-color="#fe8d31" style="background: #fe8d31;"></a>
+           	<a href="#" class="color-btn" data-color="#ee4957" style="background: #ee4957;"></a>
+           	<a href="#" class="color-btn" data-color="#d0086a" style="background: #d0086a;"></a>
+           	<a href="#" class="color-btn" data-color="#a108ba" style="background: #a108ba;"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b>Code:</b></p>
+				<code>
+				$('#canvas2').sketch();<br>
+					$('.color-btn').click(function(e) {<br>
+					&nbsp;&nbsp;e.preventDefault();<br>
+					<br>
+					&nbsp;&nbsp;$('#canvas2').sketch('set', 'color', $(this).data('color'));<br>
+					});
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<p class="lead">3. Size change:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="200" id="canvas3"></canvas>
+					<hr>
+					<div>
+						Choose size: <select class="change-size form-control" style="display: inline-block; max-width: 100px;">
+							<option value="3">3</option>
+							<option value="5" selected>5 (default)</option>
+							<option value="8">8</option>
+							<option value="11">11</option>
+							<option value="14">14</option>
+							<option value="17">17</option>
+							<option value="20">20</option>
+							<option value="23">23</option>
+							<option value="25">25</option>
+							<option value="40">40</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b>Code:</b></p>
+				<code>
+					$('#canvas3').sketch();<br>
+					$('.change-size').change(function(e) {<br>
+					&nbsp;&nbsp;$('#canvas3').sketch('set', 'size', $(this).val());<br>
+					});<br>
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<p class="lead">4. Custom background and save:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="400" id="canvas4"></canvas>
+					<hr>
+					<a href="#" class="btn btn-primary save-sketch pull-left">Save sketch</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b class="text-danger">The following example of save won't work on local machines, due to cross-origin policy.
+					To try out this feature, upload that page to your web-server.</b></p>
+				<p><b>Code:</b></p>
+				<code>
+					$('#canvas4').sketch();<br>
+					$('#canvas4').sketch('loadBg', 'img.jpg');<br>
+					$('.save-sketch').click(function(e) {<br>
+					&nbsp;&nbsp;e.preventDefault();<br>
+					&nbsp;&nbsp;$('#canvas4').sketch('download');<br>
+					});<br>
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<p class="lead">5. Resize handling:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="200" id="canvas5"></canvas>
+					<hr>
+					<a href="#" class="btn btn-primary resize-sketch pull-left">Resize sketch</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b>This example shows, that your drawings are resized proportionally to your canvas, when it resizes.<br>
+				Not as in original <a href="https://github.com/intridea/sketch.js">intridea/sketch.js</a> library.</b></p>
+				<p><b>Code:</b></p>
+				<code>
+					$('#canvas5').sketch();<br>
+					$('.resize-sketch').click(function(e) {<br>
+					&nbsp;&nbsp;e.preventDefault();<br>
+					&nbsp;&nbsp;$('#canvas5').height(<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;Math.floor(Math.random() * (400 - 100)) + 100<br>
+					&nbsp;&nbsp;);<br>
+					});<br>
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<p class="lead">6. Undo method:</p>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas style="width: 100%;" height="200" id="canvas6"></canvas>
+					<hr>
+					<a href="#" class="btn btn-danger undo-sketch pull-left">Undo last action</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="code">
+				<p><b>Code:</b></p>
+				<code>
+					$('#canvas6').sketch();<br>
+					$('.undo-sketch').click(function(e) {<br>
+					&nbsp;&nbsp;e.preventDefault();<br>
+					&nbsp;&nbsp;$('#canvas6').sketch('undo');<br>
+					});
+				</code>
+			</div>
+		</div>
+	</div>
+
+	<!-- script references -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/libs/bootstrap.min.js"></script>
+		<script src='../lib/sketch.js'></script>
+		<style>
+			/* Custom styles for this example */
+			a.color-btn {
+					display: inline-block;
+					border-radius: 50%;
+					padding: 10px;
+					border: 1px solid #000000;
+					transition: all 0.3s ease;
+			}
+
+			a.color-btn:hover {
+					-webkit-filter: brightness(135%);
+			}
+
+			a.color-btn.active {
+					border: 2px solid #000000;
+					padding: 9px;
+			}
+		</style>
+		<script>
+			$(document).ready(function() {
+				$('#canvas1').sketch();
+
+				$('#canvas2').sketch();
+				$('.color-btn').click(function(e) {
+					e.preventDefault();
+
+					$('.color-btn').removeClass('active');
+					$(this).addClass('active');
+
+					$('#canvas2').sketch('set', 'color', $(this).data('color'));
+				});
+
+				$('#canvas3').sketch();
+				$('.change-size').change(function(e) {
+					$('#canvas3').sketch('set', 'size', $(this).val());
+				});
+
+				$('#canvas4').sketch();
+				$('#canvas4').sketch('loadBg', 'img.jpg');
+				$('.save-sketch').click(function(e) {
+					e.preventDefault();
+					$('#canvas4').sketch('download');
+				});
+
+				$('#canvas5').sketch();
+				$('.resize-sketch').click(function(e) {
+					e.preventDefault();
+					$('#canvas5').height(Math.floor(Math.random() * (400 - 100)) + 100);
+				});
+
+				$('#canvas6').sketch();
+				$('.undo-sketch').click(function(e) {
+					e.preventDefault();
+					$('#canvas6').sketch('undo');
+				});
+			});
+		</script>
+	</body>
+</html>
